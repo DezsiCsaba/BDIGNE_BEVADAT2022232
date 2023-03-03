@@ -91,6 +91,7 @@ def dict_to_list(input_dict):
     output = []
     for x, y in input_dict.items():
         output.append((x,y))
+        
     return output
 
 #dict_to_list(input_dict)

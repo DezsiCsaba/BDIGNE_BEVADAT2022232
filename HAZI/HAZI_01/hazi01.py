@@ -224,6 +224,7 @@ def mean_key_value(input_dict):
             ct += 1
         mean = mean / ct
         out[key] = mean
+        
     return out
 
 #mean_key_value({"even": [2, 4, 6, 8], "odd": [1, 3, 5, 7]})
