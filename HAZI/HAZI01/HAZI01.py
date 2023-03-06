@@ -9,12 +9,12 @@
 def subset(input_list, start_index, end_index):
     output = []
     ct = start_index
-    while (ct <= end_index):  #if we go with the assumption that the ending index is still part of the subset it's '<='
+    while (ct < end_index):  #if we go with the assumption that the ending index is still part of the subset it's '<='
         output.append(input_list[ct])       #if we don't wish to include the ending index then it is just '<'
         ct += 1                             #I was unsure which way to go, so I went with the first
     return output             #kinda same with the start index, but it is usually included before eincreasing the indexer
 
-#subset([0,1,2,3,4], 0, 1)
+#subset([1,2,3,4,5], 1, 4)
 
 # %%
 #Create a function that returns every nth element of a list.
@@ -25,13 +25,14 @@ def subset(input_list, start_index, end_index):
 # %%
 def every_nth(input_list,step_size):
     output = []
-    ct = step_size - 1  #unsure if we want the list[index] or the n-th
+    output.append(input_list[0])
+    ct = step_size  #unsure if we want the list[index] or the n-th
     while (ct < len(input_list)):
         output.append(input_list[ct])
         ct += step_size    
     return output
 
-#every_nth([0,1,2,3,4,5,6,7,8,9], 2)
+#every_nth([1,2,3,4,5,6,7,8,9], 3)
 
 # %%
 #Create a function that can decide whether a list contains unique values or not
@@ -47,7 +48,7 @@ def unique(input_list):
             return False
         else : out.append(item)
     return True
-#unique([1,2,3,4,1])
+#unique([])
 
 # %%
 #Create a function that can flatten a nested list ([[..],[..],..])
@@ -62,7 +63,7 @@ def flatten(input_list):
         for mini in nested:
             out.append(mini)
     return out
-#flatten([[1,2,3],[1,2],[1]])
+#flatten([[1,2],[3,4],[5,6]])
 
 # %%
 #Create a function that concatenates n lists
@@ -104,7 +105,7 @@ def reverse_tuples(input_list):  #this won't work with bigger tuples, but i assu
 #input parameters: input_list
 
 # %%
-def remove_tuplicates(input_list):
+def remove_duplicates(input_list):
     out = []
     for item in input_list:
         if (item not in out):
@@ -112,7 +113,7 @@ def remove_tuplicates(input_list):
     input_list = out
     return input_list
 
-#remove_tuplicates([1,2,3,4,5,2,3,4])
+#remove_duplicates([1,2,3,3,4,5])
 
 # %%
 #Create a function that transposes a nested list (matrix)
@@ -133,7 +134,7 @@ def transpose(input_list):
 
     return out
 
-#transpose([[0,1],[2,3],[4,5]])
+#transpose([[1,2,3],[4,5,6],[7,8,9]])
 
 # %%
 #Create a function that can split a nested list into chunks
@@ -144,15 +145,11 @@ def transpose(input_list):
 
 # %%
 def split_into_chunks(input_list,chunk_size):
-    flat = []
     out = []
-    for nested in input_list:
-        for mini in nested:
-            flat.append(mini)
-
+    
     chunk = []
-    for i in range(len(flat)):
-        chunk.append(flat[i])
+    for i in range(len(input_list)):
+        chunk.append(input_list[i])
         if ((i+1) % chunk_size == 0):
             out.append(chunk)
             chunk = []
@@ -160,7 +157,7 @@ def split_into_chunks(input_list,chunk_size):
         out.append(chunk)
     return out
 
-#split_into_chunks([[0,1],[2,3],[4,5]], 5)
+#split_into_chunks([1,2,3,4,5,6,7,8], 3)
 
 # %%
 #Create a function that can merge n dictionaries
@@ -169,9 +166,9 @@ def split_into_chunks(input_list,chunk_size):
 #input parameters: *dict
 
 # %%
-def merge_dicts(*dict):
+def merge_dicts(*args):
     out={}
-    for d in dict:
+    for d in args:
         for x,y in d.items():
             out[x] = y
     return out
@@ -183,6 +180,7 @@ def merge_dicts(*dict):
 #  "conference" : "Western",
 #  "Division": "Pacific",
 #})
+#merge_dicts({"one":1,"two":2}, {"four":4,"three":3})
 
 # %%
 #Create a function that receives a list of integers and sort them by parity
@@ -200,7 +198,7 @@ def by_parity(input_list):
         else: out["odd"].append(num)    
     return out
 
-#by_parity([1,2,3,4,5,6,7,7,2])
+#by_parity([1,2,3,4,5,6])
 
 # %%
 #Create a function that receives a dictionary like this: {"some_key":[1,2,3,4],"another_key":[1,2,3,4],....}
@@ -224,10 +222,10 @@ def mean_key_value(input_dict):
             ct += 1
         mean = mean / ct
         out[key] = mean
-        
     return out
 
 #mean_key_value({"even": [2, 4, 6, 8], "odd": [1, 3, 5, 7]})
+#mean_key_value({"some_key":[1,2,3,4],"another_key":[1,2,3,4]})
 
 # %%
 #If all the functions are created convert this notebook into a .py file and push to your repo
