@@ -15,6 +15,7 @@ import numpy as np
 
 def create_array(size = (2,2)):
     out = np.zeros(size, dtype=int)
+    
     return out
 
 #create_array((5,5))
