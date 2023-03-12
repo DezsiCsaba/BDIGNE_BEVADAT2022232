@@ -31,7 +31,7 @@ def column_swap(arr):
 # egyenlő elemszámúakra kell csak hogy működjön
 
 def compare_two_array(arr1, arr2):
-    out = np.array((arr1[:]==arr2[:])).astype(int)
+    out = np.array((arr1[:]==arr2[:]))
     return np.nonzero(out)[0]
 
 #compare_two_array(np.array([7,8,9]), np.array([9,8,7]))
@@ -47,7 +47,7 @@ def get_array_shape(arr):
     out = ("sor: " + str(arr.shape[0]) + ", oszlop: " + str(arr.shape[1]) + ", melyseg: " + str(arr.ndim))    
     return out
 
-#get_array_shape(np.array([[1,2,3], [4,5,6]]))
+get_array_shape(np.array([[1,2,3], [4,5,6]]))
 
 # %%
 # Készíts egy olyan függvényt, aminek segítségével elő tudod állítani egy neurális hálózat tanításához szükséges pred-et egy numpy array-ből. 
@@ -119,9 +119,8 @@ def replace_by_value(arr, num):
 # array_multi()
 # Ha több dimenziós a tömb, akkor az egész tömb elemeinek szorzatával térjen vissza
 
-def array_multi(arr):
-    
-    return None
+def array_multi(arr):    
+    return np.prod(arr, axis=0)
 
 #array_multi(np.array([1,2,3,4]))
 
@@ -130,6 +129,11 @@ def array_multi(arr):
 # Be: [[1, 2], [3, 4]]
 # Ki: [2, 12]
 # array_multi_2d()
+
+def array_multi_2d(arr):
+    return np.prod(arr, axis=1)
+
+#array_multi_2d(np.array([[1, 2], [3, 4]]))
 
 # %%
 # Készíts egy olyan függvényt, amit egy meglévő numpy array-hez készít egy bordert nullásokkal. Bementként egy array-t várjon és kimenetként egy array jelenjen meg aminek van border-je
@@ -153,8 +157,7 @@ def add_border(arr):
 # list_days()
 
 def list_days(start, end):
-    out=[]
-    return out
+    return np.array(np.arange(start, end, dtype='datetime64[D]'), dtype=str)
 
 #list_days('2023-03', '2023-04')
 
@@ -165,8 +168,9 @@ def list_days(start, end):
 # get_act_date()
 
 def get_act_date():
-    out = None
-    return out
+    return np.datetime64('today')
+
+#get_act_date()
 
 # %%
 # Írj egy olyan függvényt ami visszadja, hogy mennyi másodperc telt el 1970 január 01. 00:02:00 óta. Int-el térjen vissza
@@ -175,7 +179,9 @@ def get_act_date():
 # sec_from_1970()
 
 def sec_from_1970():
-    out =None
-    return out
+    secs = (np.datetime64('now') - np.datetime64('1970-01-01T00:02:00')) / np.timedelta64(1, 's')
+    return int(secs)
+
+#sec_from_1970()
 
 
