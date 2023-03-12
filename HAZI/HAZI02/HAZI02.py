@@ -98,7 +98,7 @@ def eval_classification(lst, arr):
 def repalce_odd_numbers(arr):
     return np.where(arr%2!=0, -1, arr)
 
-r#epalce_odd_numbers(np.array([1,2,3,4,5,6]))
+#repalce_odd_numbers(np.array([1,2,3,4,5,6]))
 
 # %%
 # Készíts egy olyan függvényt, ami egy array értékeit -1 és 1-re változtatja, attól függően, hogy az adott elem nagyobb vagy kisebb a paraméterként megadott számnál.
@@ -123,7 +123,7 @@ def array_multi(arr):
     
     return None
 
-array_multi(np.array([1,2,3,4]))
+#array_multi(np.array([1,2,3,4]))
 
 # %%
 # Készíts egy olyan függvényt, ami egy 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
@@ -156,7 +156,7 @@ def list_days(start, end):
     out=[]
     return out
 
-list_days('2023-03', '2023-04')
+#list_days('2023-03', '2023-04')
 
 # %%
 # Írj egy fügvényt ami vissza adja az aktuális dátumot az alábbi formában: YYYY-MM-DD. Térjen vissza egy 'numpy.datetime64' típussal.
