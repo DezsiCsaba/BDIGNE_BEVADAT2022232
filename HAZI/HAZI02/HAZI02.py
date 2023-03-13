@@ -164,7 +164,9 @@ def add_border(arr):
 #12
 
 def list_days(start, end):
-    return np.array(np.arange(start, end, dtype='datetime64[D]'), dtype=str)
+    st = np.datetime64(start)
+    en = np.datetime64(end)
+    return np.arange(st, en, np.timedelta64(1,"D"))
 
 #list_days('2023-03', '2023-04')
 
