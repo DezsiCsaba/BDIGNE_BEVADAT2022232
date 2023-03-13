@@ -14,6 +14,7 @@ import numpy as np
 # Be: [[1,2],[3,4]]
 # Ki: [[2,1],[4,3]]
 # column_swap()
+#1
 
 def column_swap(arr):
     out = arr
@@ -29,9 +30,10 @@ def column_swap(arr):
 # Ki: [1]
 # compare_two_array()
 # egyenlő elemszámúakra kell csak hogy működjön
+#2
 
 def compare_two_array(arr1, arr2):
-    out = np.array((arr1[:]==arr2[:]))
+    out = np.array((arr1[:]==arr2[:])).astype(int)
     return np.nonzero(out)[0]
 
 #compare_two_array(np.array([7,8,9]), np.array([9,8,7]))
@@ -42,12 +44,13 @@ def compare_two_array(arr1, arr2):
 # Ki: "sor: 2, oszlop: 3, melyseg: 1"
 # get_array_shape()
 # 3D-vel még műküdnie kell!, 
+#3
 
 def get_array_shape(arr):
-    out = ("sor: " + str(arr.shape[0]) + ", oszlop: " + str(arr.shape[1]) + ", melyseg: " + str(arr.ndim))    
+    out = ("sor: " + str(arr.shape[0]) + ", oszlop: " + str(arr.shape[1]) + ", melyseg: " + str(arr.ndim-1))    
     return out
 
-get_array_shape(np.array([[1,2,3], [4,5,6]]))
+#get_array_shape(np.array([[1,2,3], [4,5,6]]))
 
 # %%
 # Készíts egy olyan függvényt, aminek segítségével elő tudod állítani egy neurális hálózat tanításához szükséges pred-et egy numpy array-ből. 
@@ -56,6 +59,7 @@ get_array_shape(np.array([[1,2,3], [4,5,6]]))
 # Be: [1, 2, 0, 3], 4
 # Ki: [[0,1,0,0], [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 0, 1]]
 # encode_Y()
+#4
 
 def encode_Y(arr, num):
     out = np.zeros(shape=(num,len(arr)), dtype=int)
@@ -72,6 +76,7 @@ def encode_Y(arr, num):
 # Be:  [[0,1,0,0], [0, 0, 1, 0], [1, 0, 0, 0], [0, 0, 0, 1]]
 # Ki:  [1, 2, 0, 3]
 # decode_Y()
+#5
 
 def decode_Y(arr):
     return np.where(arr==1)[1]
@@ -83,6 +88,7 @@ def decode_Y(arr):
 # Be: ['alma', 'körte', 'szilva'], [0.2, 0.2, 0.6]. # Az ['alma', 'körte', 'szilva'] egy lista!
 # Ki: 'szilva'
 # eval_classification()
+#6
 
 def eval_classification(lst, arr):
     return lst[np.where(arr==np.amax(arr))[0][0]]
@@ -94,11 +100,12 @@ def eval_classification(lst, arr):
 # Be: [1,2,3,4,5,6]
 # Ki: [-1,2,-1,4,-1,6]
 # replace_odd_numbers()
+#7
 
-def repalce_odd_numbers(arr):
+def replace_odd_numbers(arr):
     return np.where(arr%2!=0, -1, arr)
 
-#repalce_odd_numbers(np.array([1,2,3,4,5,6]))
+#replace_odd_numbers(np.array([1,2,3,4,5,6]))
 
 # %%
 # Készíts egy olyan függvényt, ami egy array értékeit -1 és 1-re változtatja, attól függően, hogy az adott elem nagyobb vagy kisebb a paraméterként megadott számnál.
@@ -106,6 +113,7 @@ def repalce_odd_numbers(arr):
 # Be: [1, 2, 5, 0], 2
 # Ki: [-1, 1, 1, -1]
 # replace_by_value()
+#8
 
 def replace_by_value(arr, num):
     return np.where(arr>=num, 1, -1)
@@ -118,8 +126,9 @@ def replace_by_value(arr, num):
 # Ki: 24
 # array_multi()
 # Ha több dimenziós a tömb, akkor az egész tömb elemeinek szorzatával térjen vissza
+#9
 
-def array_multi(arr):    
+def array_multi(arr):
     return np.prod(arr, axis=0)
 
 #array_multi(np.array([1,2,3,4]))
@@ -129,6 +138,7 @@ def array_multi(arr):
 # Be: [[1, 2], [3, 4]]
 # Ki: [2, 12]
 # array_multi_2d()
+#10
 
 def array_multi_2d(arr):
     return np.prod(arr, axis=1)
@@ -140,6 +150,7 @@ def array_multi_2d(arr):
 # Be: [[1,2],[3,4]]
 # Ki: [[0,0,0,0],[0,1,2,0],[0,3,4,0],[0,0,0,0]]
 # add_border()
+#11
 
 def add_border(arr):
     return np.pad(arr, 1)
@@ -155,6 +166,7 @@ def add_border(arr):
 # Be: '2023-03', '2023-04'  # mind a kettő paraméter str.
 # Ki: ['2023-03-01', '2023-03-02', .. , '2023-03-31',]
 # list_days()
+#12
 
 def list_days(start, end):
     return np.array(np.arange(start, end, dtype='datetime64[D]'), dtype=str)
@@ -166,6 +178,7 @@ def list_days(start, end):
 # Be:
 # Ki: 2017-03-24
 # get_act_date()
+#13
 
 def get_act_date():
     return np.datetime64('today')
@@ -177,6 +190,7 @@ def get_act_date():
 # Be: 
 # Ki: másodpercben az idó, int-é kasztolva
 # sec_from_1970()
+#14
 
 def sec_from_1970():
     secs = (np.datetime64('now') - np.datetime64('1970-01-01T00:02:00')) / np.timedelta64(1, 's')
