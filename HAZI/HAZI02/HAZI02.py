@@ -47,7 +47,7 @@ def compare_two_array(arr1, arr2):
 #3
 
 def get_array_shape(arr):
-    out = ("sor: " + str(arr.shape[0]) + ", oszlop: " + str(arr.shape[1]) + ", melyseg: " + str(arr.ndim-1))    
+    out = ("sor: " + str(arr.shape[0]) + ", oszlop: " + str(arr.shape[1]) + ", melyseg: " + str(arr.ndim-1))
     return out
 
 #get_array_shape(np.array([[1,2,3], [4,5,6]]))
@@ -129,9 +129,9 @@ def replace_by_value(arr, num):
 #9
 
 def array_multi(arr):
-    return np.prod(arr, axis=0)
+    return np.prod(arr)
 
-#array_multi(np.array([1,2,3,4]))
+#array_multi(np.array([[1, 2], [3, 4]]))
 
 # %%
 # Készíts egy olyan függvényt, ami egy 2D array értékeit összeszorozza és egy olyan array-el tér vissza, aminek az elemei a soroknak a szorzata
