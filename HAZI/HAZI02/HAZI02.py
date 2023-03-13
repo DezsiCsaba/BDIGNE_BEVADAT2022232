@@ -43,11 +43,11 @@ def compare_two_array(arr1, arr2):
 # Be: [[1,2,3], [4,5,6]]
 # Ki: "sor: 2, oszlop: 3, melyseg: 1"
 # get_array_shape()
-# 3D-vel még műküdnie kell!, 
+# 3D-vel még műküdnie kell!,
 #3
 
 def get_array_shape(arr):
-    out = ("sor: " + str(arr.shape[0]) + ", oszlop: " + str(arr.shape[1]) + ", melyseg: " + str(arr.ndim-1))
+    out = ("sor: " + str(arr.shape[0]) + ", oszlop: " + str(arr.shape[1]) + ", melyseg: " + str(arr.ndim))
     return out
 
 #get_array_shape(np.array([[1,2,3], [4,5,6]]))
@@ -62,14 +62,9 @@ def get_array_shape(arr):
 #4
 
 def encode_Y(arr, num):
-    out = np.zeros(shape=(num,len(arr)), dtype=int)
-    #print(out)
-    indicies = np.expand_dims(arr, 1)
-    #print(indicies)
-    np.put_along_axis(out, indicies, 1, axis=1)
-    return out
+    return np.eye(num)[arr]
 
-#encode_Y(np.array([1, 2, 0, 3], dtype=int), 4)
+#encode_Y(np.array([1, 2, 0, 3]), 4)
 
 # %%
 # A fenti feladatnak valósítsd meg a kiértékelését. Adj meg a 2d array-t és adj vissza a decodolt változatát
