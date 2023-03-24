@@ -44,7 +44,7 @@ függvény neve: capitalize_columns
 def capitalize_columns(frame:pd.DataFrame) -> pd.core.frame.DataFrame:
     pdf = frame.copy()
     for col in frame.columns:
-        if 'e' in col:
+        if 'e' not in col:
             pdf.rename(columns={col:col.upper()}, inplace=True)
     return pdf
 
@@ -65,8 +65,8 @@ függvény neve: math_passed_count
 #3
 def math_passed_count(frame:pd.DataFrame) -> int:
     pdf = frame.copy()
-    out=0
-    
+    out=pdf[pdf['math score'] >= 50 ]
+    out=out['math score'].count()
     return out
 
 #math_passed_count(myframe)
@@ -82,7 +82,13 @@ függvény neve: did_pre_course
 '''
 
 # %%
+#4
+def did_pre_course(frame:pd.DataFrame) -> pd.core.frame.DataFrame:
+    pdf = frame.copy()
+    out=pdf[pdf['test preparation course'] == 'completed' ]
+    return out
 
+#did_pre_course(myframe)
 
 # %%
 '''
@@ -96,7 +102,17 @@ függvény neve: average_scores
 '''
 
 # %%
+#5
+def average_scores(frame:pd.DataFrame) -> pd.core.frame.DataFrame:
+    pdf = frame.copy()
+    #pdf['AVG_score'] = np.average([pdf['math score'], pdf['reading score'], pdf['writing score']])
+    #out = pdf.groupby('parental level of education')
+    #out = out.aggregate(arg=(np.average(out['math score'] + out['reading score'] + out['writing score'])))
 
+    out = pdf.groupby('parental level of education').mean()
+    return out
+
+#average_scores(myframe)
 
 # %%
 '''
@@ -110,7 +126,15 @@ függvény neve: add_age
 '''
 
 # %%
+#6
+import random
+def add_age(frame:pd.DataFrame) -> pd.core.frame.DataFrame:
+    pdf = frame.copy()
+    np.random.seed(42)
+    pdf['age'] = np.random.randint(18,66)
+    return pdf
 
+#add_age(myframe)
 
 # %%
 '''
@@ -123,7 +147,7 @@ függvény neve: female_top_score
 '''
 
 # %%
-
+#7
 
 # %%
 '''
@@ -143,7 +167,7 @@ függvény neve: add_grade
 '''
 
 # %%
-
+#8
 
 # %%
 '''
@@ -161,7 +185,7 @@ függvény neve: math_bar_plot
 '''
 
 # %%
-
+#9
 
 # %%
 ''' 
@@ -179,7 +203,7 @@ függvény neve: writing_hist
 '''
 
 # %%
-
+#10
 
 # %%
 ''' 
@@ -197,6 +221,6 @@ függvény neve: ethnicity_pie_chart
 '''
 
 # %%
-
+#11
 
 
