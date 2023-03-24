@@ -25,7 +25,7 @@ def csv_to_df(utvonal:str) -> pd.core.frame.DataFrame:
     out=pd.read_csv(utvonal)
     return out
 
-#myframe = csv_to_df("StudentsPerformance.csv")
+myframe = csv_to_df("StudentsPerformance.csv")
 #csv_to_df("StudentsPerformance.csv")
 
 # %%
@@ -148,6 +148,15 @@ függvény neve: female_top_score
 
 # %%
 #7
+def female_top_score(frame:pd.DataFrame) -> tuple:
+    pdf = frame.copy()
+    pdf = pdf[pdf['gender'] == 'female' ]
+    pdf['SUM'] = (pdf['math score'] + pdf['reading score'] + pdf['writing score'])
+    pdf = pdf.sort_values("SUM").tail(1)
+    out = (pdf["math score"].values[0], pdf['reading score'].values[0], pdf['writing score'].values[0])
+    return out
+
+#female_top_score(myframe)
 
 # %%
 '''
@@ -168,6 +177,13 @@ függvény neve: add_grade
 
 # %%
 #8
+def add_grade(frame:pd.DataFrame) -> pd.core.frame.DataFrame:
+    pdf = frame.copy()
+    pdf['percentage'] = ((pdf['math score'] + pdf['reading score'] + pdf['writing score'])/3)
+    pdf['grade'] = pdf['percentage'].apply((lambda x: 'F' if x < 60 else ('D' if x < 70 else ('C' if x < 80 else ('B' if x < 90 else ('A' if x >= 90 else None))))))
+    return pdf
+
+#add_grade(myframe)
 
 # %%
 '''
