@@ -234,7 +234,21 @@ függvény neve: writing_hist
 
 # %%
 #10
+def writing_hist(frame:pd.DataFrame) -> plt.Figure:
+    pdf = frame.copy()
 
+    fig, ax = plt.subplots()
+    group=pdf.groupby(['writing score'])
+    ax.hist(group['gender'].count().values,group.groups.keys())
+
+    ax.set_title('Distribution of Writing Scores')
+    ax.set_xlabel('Writing Score')
+    ax.set_ylabel("Number of Students")
+    
+    return fig
+
+
+#writing_hist(myframe)
 # %%
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan kördiagramot,
@@ -252,5 +266,15 @@ függvény neve: ethnicity_pie_chart
 
 # %%
 #11
+def ethnicity_pie_chart(frame:pd.DataFrame) -> plt.Figure:  
+    pdf = frame.copy()
 
+    group=pdf.groupby(['race/ethnicity'])
+
+    fig, ax = plt.subplots()
+    ax.set_title("Distribution of Writing Scores")
+    ax.pie(group.count()["lunch"].values, labels=group.groups.keys(),autopct='%1.1f%%')
+    return fig
+
+#ethnicity_pie_chart(myframe)
 
