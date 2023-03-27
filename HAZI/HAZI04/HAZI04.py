@@ -131,7 +131,7 @@ import random
 def add_age(frame:pd.DataFrame) -> pd.core.frame.DataFrame:
     pdf = frame.copy()
     np.random.seed(42)
-    pdf['age'] = np.random.randint(18,66)
+    pdf['age'] = np.random.randint(18,67)
     return pdf
 
 #add_age(myframe)
