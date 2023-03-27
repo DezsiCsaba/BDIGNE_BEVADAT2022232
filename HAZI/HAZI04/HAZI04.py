@@ -25,7 +25,7 @@ def csv_to_df(utvonal:str) -> pd.core.frame.DataFrame:
     out=pd.read_csv(utvonal)
     return out
 
-myframe = csv_to_df("StudentsPerformance.csv")
+#myframe = csv_to_df("StudentsPerformance.csv")
 #csv_to_df("StudentsPerformance.csv")
 
 # %%
