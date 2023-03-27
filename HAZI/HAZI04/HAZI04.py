@@ -202,7 +202,21 @@ függvény neve: math_bar_plot
 
 # %%
 #9
+def math_bar_plot(frame:pd.DataFrame) -> plt.figure:
+    pdf = frame.copy()
 
+    fig, ax = plt.subplots()
+    group=pdf.groupby(['gender'])
+    
+    ax.bar(group.groups.keys(),group.mean()['math score'].values)
+
+    ax.set_title = 'Average Math Score by Gender'
+    ax.set_xlabel = 'Gender'
+    ax.set_ylabel = 'Math Score'
+
+    return fig
+
+#math_bar_plot(myframe)
 # %%
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan histogramot,
