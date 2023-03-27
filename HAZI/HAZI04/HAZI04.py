@@ -127,11 +127,10 @@ függvény neve: add_age
 
 # %%
 #6
-import random
 def add_age(frame:pd.DataFrame) -> pd.core.frame.DataFrame:
     pdf = frame.copy()
     np.random.seed(42)
-    pdf['age'] = np.random.randint(18,67)
+    pdf['age'] = np.random.randint(18,67, size=len(pdf))
     return pdf
 
 #add_age(myframe)
@@ -210,13 +209,14 @@ def math_bar_plot(frame:pd.DataFrame) -> plt.figure:
     
     ax.bar(group.groups.keys(),group.mean()['math score'].values)
 
-    ax.set_title = 'Average Math Score by Gender'
-    ax.set_xlabel = 'Gender'
-    ax.set_ylabel = 'Math Score'
-
+    ax.set_title("Average Math Score by Gender")
+    ax.set_xlabel("Gender")
+    ax.set_ylabel("Math Score")
+    
     return fig
 
 #math_bar_plot(myframe)
+
 # %%
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan histogramot,
@@ -239,7 +239,7 @@ def writing_hist(frame:pd.DataFrame) -> plt.Figure:
 
     fig, ax = plt.subplots()
     group=pdf.groupby(['writing score'])
-    ax.hist(group['gender'].count().values,group.groups.keys())
+    ax.hist(group['gender'].count())
 
     ax.set_title('Distribution of Writing Scores')
     ax.set_xlabel('Writing Score')
@@ -249,6 +249,7 @@ def writing_hist(frame:pd.DataFrame) -> plt.Figure:
 
 
 #writing_hist(myframe)
+
 # %%
 ''' 
 Készíts egy függvényt, ami a bemeneti Dataframe adatai alapján elkészít egy olyan kördiagramot,
@@ -272,9 +273,8 @@ def ethnicity_pie_chart(frame:pd.DataFrame) -> plt.Figure:
     group=pdf.groupby(['race/ethnicity'])
 
     fig, ax = plt.subplots()
-    ax.set_title("Distribution of Writing Scores")
+    ax.set_title("Proportion of Students by Race/Ethnicity")
     ax.pie(group.count()["lunch"].values, labels=group.groups.keys(),autopct='%1.1f%%')
     return fig
 
 #ethnicity_pie_chart(myframe)
-
