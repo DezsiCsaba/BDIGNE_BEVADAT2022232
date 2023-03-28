@@ -3,12 +3,11 @@ import numpy as np
 from typing import Tuple
 from scipy.stats import mode
 from sklearn.metrics import confusion_matrix
-#import seaborn as sns
+import seaborn as sns
 
-# %%
-'''
-Mudliból kapott .csv file-t és feladatleírást felhasználva kell megvalósítani a felhasználni kívánt fv-eket
-'''
+# %% [markdown]
+# - Mudliból kapott .csv file-t és feladatleírást felhasználva kell megvalósítani a felhasználni kívánt fv-eket
+# - py -m pip install seaborn
 
 # %%
 #basic .csv import inti (x,y) tuple
