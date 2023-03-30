@@ -6,8 +6,17 @@ class KNNClassifier():
         self.k = k
         self.test_split_ratio = test_split_ratio
 
-    #k_neighbors = self.k        #SZÁMTING VONG HÍR
+    @property
+    def k_neighbors(self) -> int:
+        return self.k
 
+    @staticmethod
+    def load_csv(cs_path : str):
+        np.random.seed(42)
+        dataset = np.genfromtxt(cs_path, delimiter=',')
+        np.random.shuffle(dataset)
+        x,y = dataset[:, :-1],dataset[:, -1]
+        return x,y
 
     def train_test_splitting(self, features: np.ndarray, labels: np.ndarray,):
         
