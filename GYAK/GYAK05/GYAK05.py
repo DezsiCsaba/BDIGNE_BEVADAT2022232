@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.stats import mode
+from sklearn.metrics import confusion_matrix
 
 class KNNClassifier():
     def __init__(self, k:int, test_split_ratio:float):
@@ -9,6 +10,9 @@ class KNNClassifier():
     @property
     def k_neighbors(self) -> int:
         return self.k
+
+    def confusion_matrix(self) -> np.ndarray:
+        return confusion_matrix(self.y_test, self.y_preds)
 
     @staticmethod
     def load_csv(cs_path : str):
