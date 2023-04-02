@@ -1,0 +1,65 @@
+__init__:
+    - bemenet: vár egy int és egy float változót, ezek alapján beállítja
+        a 'k' és 'test_split_ratio' tulajdonságokat
+    - kimenet:  nincs
+
+k_neighbors:
+    - bemenet: nincs
+    - kimenet:  visszaadja a 'self.k'-t
+
+confusion_matrix:
+    - bemenet: nincs
+    - kimenet:
+        - maga a confusion_matrix
+        - Compute confusion matrix to evaluate the accuracy of a classification.
+            By definition a confusion matrix 'C' is such that 'C_i,j' is equal to
+            the number of observations known to be in group 'i' and predicted to be in group 'j'
+            Thus in binary classification, the count of true negatives is 'C_0,0'
+            , false negatives is 'C_1,0'
+            , true positives is 'C_1,1' 
+            and false positives is 'C_0,1'.
+
+load_csv:
+    - bemenet: a '.csv' útvonala, a relative/full path
+    - kimenet: két dataframet egy tuple formályában
+        - mindent visssza ad, az utolsó oszlop kivételével
+        - csak az utolsó oszlopot adja vissza
+
+train_test_split:
+    - bemenet: predictből kiszedett x-eket adjuk be
+    - kimenet: a beadott pontok és a 'self.x_train' tulajdonságban tárolt pontok
+        közti távolság négyzetének gyökével térünk vissza
+
+euclidean:
+    - bemenet: element_of_x
+    - kimenet: oszlopvektor.
+        Euklidészi távolságot számítja ki 'x_train' és az 'element_of_x'
+        pontok között.
+        Az eredményünkben az i.-ik elem a 'self.x_train' DataFrameünk
+        i-edik sora és az 'element_of_x' közötti távolság.
+
+predict:
+    - bemenet: 'x_test' -> nem teljesen tiszta, hogy miért nem eleég a 'self.x_test'
+        de ezt adjuk be neki
+    - kimenet: A beadott 'x_teszt' adathalmaz minden elemére
+        megnézzük az euklideszi távolságot. Az eredményeket hozzáadjuk egy
+        adattáblához és a távolságok szerint rendezzük őket.
+        A 'k' db/legkisebb távolságot és a hozzájuk tartozó 'label_pred'-et kiválasztja
+        és annak móduszát eltárolja az 'labels_pred' listában.
+        Ezt megismétli minden teszthalmazbeli adatponton és 
+        eltárolja őket a y_preds változóban.
+
+accuracy:
+    - bemenet: nincs
+    - kimenet: Az 'x_test' eredményeinek 'y_preds' pontosságát adja meg százalékban.
+        A pontosságot az (igaz pozitívok/összes adatok száma)-val számolja.
+        Összehasonlítja a 'y_test'-et a 'y_preds'-el.
+        Akkor igaz-pozitív, ha az 'x_test' és 'y_preds' megegyezik. Ezeket összesíti
+        majd százalékos eredményt ad
+
+best_k:
+    - bemenet: nincs
+    - kimenet:
+        Egy Tuple. Különböző 'k'-kal meghívja a 'predict'-et, majd kiszámolja az
+        accuracy-t minden iterációban. Majd visszaadja a legjobb 'k'-t (itt most k=i).
+        A tuple második fele, a 'k'-hoz tartozó accuracy-t tartalmazza
