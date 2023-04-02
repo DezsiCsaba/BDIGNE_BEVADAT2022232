@@ -56,7 +56,3 @@ class KNNClassifier():
     def accuracy(self)->float:
         true_positive= (self.y_test == self.y_preds).sum()
         return true_positive / len(self.y_test) *100
-
-
-
-
