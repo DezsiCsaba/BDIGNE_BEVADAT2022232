@@ -10,21 +10,17 @@ class KNNClassifier:
         self.test_split_ratio = test_split_ratio
 
     @property
-    def k_neighbors(self) -> int:
+    def k_neighbors(self) -> int:   #this is fine
         return self.k
 
-    def confusion_matrix(self):
-        conf_matrix = confusion_matrix(self.y_test, self.y_preds)
-        return conf_matrix
-
     @staticmethod
-    def load_csv(path: str):
+    def load_csv(path: str):    #this is fine
         dataFrame = pd.read_csv(path)
         dataFrame = dataFrame.sample(frac=1, random_state=42).reset_index(drop=True)
         return dataFrame.iloc[:,:-1], dataFrame.iloc[:,-1]
 
 
-    def train_test_split(self,features:pd.core.frame.DataFrame,labels:pd.core.series.Series):    
+    def train_test_split(self,features:pd.core.frame.DataFrame,labels:pd.core.series.Series):    #this is fine
         test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
         assert len(features) == test_size + train_size, "Size mismatch!"
@@ -33,11 +29,11 @@ class KNNClassifier:
         self.x_test,self.y_test = features.iloc[train_size:train_size+test_size,:], labels.iloc[train_size:train_size + test_size]
 
 
-    def euclidean(self, element_of_x:pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:
+    def euclidean(self, element_of_x:pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:   #this is fine
         return ((self.x_train - element_of_x)**2).sum(axis=1) ** .5
     
 
-    def predict(self, x_test: pd.core.frame.DataFrame):
+    def predict(self, x_test: pd.core.frame.DataFrame):     #should be fine
         labels_pred = []
         for x_test_element in x_test.iterrows():
             distances = self.euclidean(x_test_element)
@@ -47,10 +43,13 @@ class KNNClassifier:
         self.y_preds = pd.DataFrame(labels_pred).iloc[:,0]
 
 
-    def accuracy(self) -> float:
+    def accuracy(self) -> float:    #should be fine
         true_positive = (self.y_test.reset_index(drop=True) == self.y_preds.reset_index(drop=True)).sum()
         return true_positive/len(self.y_test) * 100
     
+    def confusion_matrix(self):
+        conf_matrix = confusion_matrix(self.y_test, self.y_preds)
+        return conf_matrix
     
     def best_k(self):
         accuracies = []
