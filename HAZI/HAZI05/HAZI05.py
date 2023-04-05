@@ -20,7 +20,7 @@ class KNNClassifier:
         return dataFrame.iloc[:,:-1], dataFrame.iloc[:,-1]
 
 
-    def train_test_split(self,features:pd.core.frame.DataFrame,labels:pd.core.series.Series):    #this is fine
+    def train_test_split(self,features:pd.DataFrame,labels:pd.Series):    #this is fine
         test_size = int(len(features) * self.test_split_ratio)
         train_size = len(features) - test_size
         assert len(features) == test_size + train_size, "Size mismatch!"
@@ -29,7 +29,7 @@ class KNNClassifier:
         self.x_test,self.y_test = features.iloc[train_size:train_size+test_size,:], labels.iloc[train_size:train_size + test_size]
 
 
-    def euclidean(self, element_of_x:pd.core.frame.DataFrame) -> pd.core.frame.DataFrame:   #this is fine
+    def euclidean(self, element_of_x:pd.core.frame.DataFrame) -> pd.DataFrame:   #this is fine
         return ((self.x_train - element_of_x)**2).sum(axis=1) ** .5
     
 
@@ -47,11 +47,11 @@ class KNNClassifier:
         true_positive = (self.y_test.reset_index(drop=True) == self.y_preds.reset_index(drop=True)).sum()
         return true_positive/len(self.y_test) * 100
     
-    def confusion_matrix(self):
+    def confusion_matrix(self):     #should be fine
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
         return conf_matrix
     
-    def best_k(self):
+    def best_k(self):       #should be fine
         accuracies = []
         for i in range(1, 21):
             self.k = i
