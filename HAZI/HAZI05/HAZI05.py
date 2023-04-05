@@ -40,6 +40,7 @@ class KNNClassifier:
             distances = pd.DataFrame(sorted(zip(distances, self.y_train)))
             label_pred = distances.iloc[:self.k,1].mode()
             labels_pred.append(label_pred)
+
         self.y_preds = pd.DataFrame(labels_pred).iloc[:,0]
 
 
@@ -51,7 +52,7 @@ class KNNClassifier:
         conf_matrix = confusion_matrix(self.y_test, self.y_preds)
         return conf_matrix
     
-    def best_k(self):       #should be fine
+    def best_k(self) -> Tuple[int,float]:       #should be fine
         accuracies = []
         for i in range(1, 21):
             self.k = i
