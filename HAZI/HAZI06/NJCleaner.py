@@ -51,8 +51,71 @@ HAZI-
 ##                                                              ##
 ##################################################################"""
 
+import numpy as np
 import pandas as pd
 
 class NJCleaner:
     def __init__(self, path:str):
         self.data = pd.read_csv(path)
+
+    def order_by_scheduled_time(self):
+        return self.data.copy().sort_values(['scheduled_time'], ascending=True)
+    
+    def drop_columns_and_nan(self):
+        data2=self.data.copy()
+        return data2.drop(["from","to"], axis=1).dropna()
+    
+    def convert_date_to_day(self):
+        data2 = self.data.copy()
+        data2['date'] = pd.to_datetime(data2['date'])
+        data2['day'] = data2['date'].dt.day_name()
+        return data2.drop(['date'], axis=1)
+    
+    def convert_scheduled_time_to_part_of_the_day(self):
+        def part_of_the_day(time_str):
+            time = pd.Timestamp(time_str).time()
+            if time >= pd.Timestamp('04:00').time() and time <= pd.Timestamp('07:59').time():
+                return 'early_morning'
+            elif time >= pd.Timestamp('08:00').time() and time <= pd.Timestamp('11:59').time():
+                return 'morning'
+            elif time >= pd.Timestamp('12:00').time() and time <= pd.Timestamp('15:59').time():
+                return 'afternoon'
+            elif time >= pd.Timestamp('16:00').time() and time <= pd.Timestamp('19:59').time():
+                return 'evening'
+            elif time >= pd.Timestamp('20:00').time() and time <= pd.Timestamp('23:59').time():
+                return 'night'
+            else:
+                return 'late_night'       
+        data2 = self.data.copy()
+        data2['part_of_the_day'] = data2['scheduled_time'].apply(part_of_the_day)
+        data2.drop(["scheduled_time"],axis=1)
+        return data2
+    
+    def convert_delay(self):
+        def DelayConvert(x):
+            if x < 5:
+                return 0
+            return 1
+         #0min <= x < 5min   --> 0  
+         #5min <= x          --> 1
+        data2=self.data.copy()
+        data2["delay"]=data2["delay_minutes"].apply(DelayConvert) 
+        return data2
+    
+    def drop_unnecessary_columns(self):
+        data2=self.data.copy()
+        return data2.drop(["train_id","actual_time","delay_minutes"],axis=1)
+    
+    def save_first_60k(self,path):
+        first60=self.data.copy().head(60000)
+        first60.to_csv(path, index=False)
+
+
+    def prep_df(self, path = 'data/NJC.csv'):
+        self.data=self.drop_columns_and_nan()
+        self.data=self.order_by_scheduled_time()
+        self.data=self.convert_date_to_day()
+        self.data=self.convert_scheduled_time_to_part_of_the_day()
+        self.data=self.convert_delay()
+        self.data=self.drop_unnecessary_columns()
+        self.data=self.save_first_60k(path)
