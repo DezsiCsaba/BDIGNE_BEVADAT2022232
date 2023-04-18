@@ -111,7 +111,7 @@ class NJCleaner:
         #self.data.iloc[:60000].to_csv(path, index=False)
 
 
-    def prep_df(self, path = 'data/NJC.csv'):
+    def prep_df(self, path = 'data/NJ.csv'):
         self.data=self.drop_columns_and_nan()
         self.data=self.order_by_scheduled_time()
         self.data=self.convert_date_to_day()
