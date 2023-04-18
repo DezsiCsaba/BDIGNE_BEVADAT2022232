@@ -34,4 +34,13 @@ classifier.fit(X_train, Y_train)
 Y_pred = classifier.predict(X_test)
 print(accuracy_score(Y_test, Y_pred))
 
-
+"""
+Megadott feladat alapján megírtam az NJCleaner-t. Ezek után kiszedtem a main-ből a szükséges .py fileokba a Node és DecisionTreeClassifier-t.
+Ezeket beimportáltam a HAZI06.ipynb-be és teszteltem a működést. 93,3-mas eredményt adott a futás után.
+Nehézségek:
+    - Másképp kezeli a .ipynb-ben és .py-ban a file elérési utakat. Mire meglett h miért nem találja. És van egy pár 'path' és 3-szor indítottam meg a .py-t
+    mire mindet átírtam. Bár ez inkább figyelmetlenség mint nehézség.
+    - Kicsit katyvasz volt úfgy az egész feladat és ismerőstől segítéget kellett kérni h megértsem
+Eredmények:
+Ezt a részt figyelmen kívül hagytam. Mai nap folyamán még pótlásra kerül. Csak idő lesz lefuttatni néhányszor és rögzíteni az erdedményeket.
+"""
