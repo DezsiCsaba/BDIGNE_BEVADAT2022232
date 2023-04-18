@@ -59,7 +59,8 @@ class NJCleaner:
         self.data = pd.read_csv(path)
 
     def order_by_scheduled_time(self):
-        return self.data.copy().sort_values(['scheduled_time'], ascending=True)
+        return self.data.sort_values(['scheduled_time'], ascending=True)
+
     
     def drop_columns_and_nan(self):
         data2=self.data.copy()
@@ -96,8 +97,6 @@ class NJCleaner:
             if x < 5:
                 return 0
             return 1
-         #0min <= x < 5min   --> 0  
-         #5min <= x          --> 1
         data2=self.data.copy()
         data2["delay"]=data2["delay_minutes"].apply(DelayConvert) 
         return data2
@@ -109,6 +108,7 @@ class NJCleaner:
     def save_first_60k(self,path):
         first60=self.data.copy().head(60000)
         first60.to_csv(path, index=False)
+        #self.data.iloc[:60000].to_csv(path, index=False)
 
 
     def prep_df(self, path = 'data/NJC.csv'):
