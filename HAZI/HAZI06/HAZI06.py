@@ -15,12 +15,12 @@ from NJCleaner import NJCleaner
 nj = NJCleaner('HAZI/HAZI06/2018_03.csv')
 #nj = NJCleaner('HAZI/HAZI06/data/NJ_60k.csv')
 
-nj.prep_df('HAZI/HAZI06/data/NJC.csv')
+nj.prep_df('HAZI/HAZI06/data/NJ.csv')
 #nj.prep_df('HAZI/HAZI06/data/NJ_60k.csv')
 
 #---------------------------------
 col_name = ['sepal_lenght', 'sepal_width', 'petal_length', 'petal_width', 'type']
-data = pd.read_csv('HAZI/HAZI06/data/NJC.csv',skiprows=1, header=None, names=col_name)
+data = pd.read_csv('HAZI/HAZI06/data/NJ.csv',skiprows=1, header=None, names=col_name)
 #data = pd.read_csv('HAZI/HAZI06/data/NJ_60k.csv',skiprows=1, header=None, names=col_name)
 
 #---------------------------------
