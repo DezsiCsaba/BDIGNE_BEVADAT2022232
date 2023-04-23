@@ -15,9 +15,10 @@ y = df['petal width (cm)'].values
 
 Lreg.fit(X, y)
 Lreg.predict(X)
+print(Lreg.evaluate(Lreg.X_test, Lreg.y_test))
 
-
-plt.scatter(Lreg.X_train, Lreg.y_train)
+# plt.scatter(Lreg.X_train, Lreg.y_train)
 plt.scatter(Lreg.X_test, Lreg.y_test)
-#plt.plot([min(Lreg.X_test), max(Lreg.X_test)], [min(Lreg.y_pred), max(Lreg.y_pred)], color='red') # predicted
+plt.plot([min(Lreg.X_test), max(Lreg.X_test)], [min(Lreg.pred), max(Lreg.pred)], color='red')  # predicted
+
 plt.show()
