@@ -25,7 +25,7 @@ függvény neve: load_iris_data
 def load_iris_data() -> skl.utils.Bunch:
     return load_iris()
 
-irisData = load_iris_data()
+#irisData = load_iris_data()
 #print(irisData)
 
 # %%
@@ -45,7 +45,7 @@ def check_data(iris) -> pd.core.frame.DataFrame:
     iris_df = pd.DataFrame(iris.data, columns=iris.feature_names).head(5)
     return iris_df
 
-check_data(irisData)
+#check_data(irisData)
 
 # %%
 ''' 
@@ -66,7 +66,7 @@ def linear_train_data(iris) -> Tuple[np.ndarray, np.ndarray]:
     y = df['sepal length (cm)'].values
     return X, y
 
-linear_train_data(irisData)
+#linear_train_data(irisData)
 
 # %%
 ''' 
@@ -88,7 +88,7 @@ def logistic_train_data(iris) -> Tuple[np.ndarray, np.ndarray]:
     y = iris.target[np.where(iris.target < 2)]
     return X,y
 
-X,y = logistic_train_data(irisData)
+#X,y = logistic_train_data(irisData)
 
 # %%
 '''
@@ -107,7 +107,7 @@ def split_data(X, y) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     split = train_test_split(X, y, test_size=0.2, random_state=42)
     return split
 
-X_train, X_test, y_train, y_test = split_data(X,y)
+#X_train, X_test, y_train, y_test = split_data(X,y)
 
 # %%
 '''
@@ -125,7 +125,7 @@ def train_linear_regression(X_train, y_train) -> skl.linear_model._base.LinearRe
     model = LinearRegression().fit(X_train, y_train)
     return model
 
-lin_model = train_linear_regression(X_train, y_train)
+#lin_model = train_linear_regression(X_train, y_train)
 
 # %%
 '''
@@ -143,7 +143,7 @@ def train_logistic_regression(X_train, y_train) -> skl.linear_model._logistic.Lo
     model = LogisticRegression(solver='liblinear', random_state=42).fit(X_train, y_train)
     return model
 
-log_model = train_logistic_regression(X_train, y_train)
+#log_model = train_logistic_regression(X_train, y_train)
 
 # %%
 ''' 
@@ -161,8 +161,11 @@ def predict(model, X_test) -> np.ndarray:
     y_pred =  model.predict(X_test)
     return y_pred
 
-print(predict(lin_model, X_test))
-print(predict(log_model, X_test))
+#y_pred_lin = predict(lin_model, X_test)
+#print(predict(lin_model, X_test))
+
+#y_pred_log = predict(log_model, X_test)
+#print(predict(log_model, X_test))
 
 # %%
 '''
@@ -181,8 +184,19 @@ függvény neve: plot_actual_vs_predicted
 
 # %%
 #9
-def plot_actual_vs_predicted():
-    pass
+def plot_actual_vs_predicted(y_test, y_pred) -> plt.Figure:
+    scatter_plot, ax = plt.subplots()
+    
+    ax.scatter(y_test, y_pred)
+
+    ax.set_title("Actual vs Predicted Target Values")
+    ax.set_xlabel("Actual")
+    ax.set_ylabel("Predicted")
+    
+    return scatter_plot
+
+
+#plot_actual_vs_predicted(y_test, y_pred_lin)
 
 # %%
 ''' 
@@ -196,7 +210,10 @@ függvény neve: evaluate_model
 
 # %%
 #10
-def evaluate_model():
-    pass
+def evaluate_model(y_test, y_pred) -> float:
+    mse = mean_squared_error(y_test, y_pred)
+    return mse
+
+#evaluate_model(y_test, y_pred_lin)
 
 
