@@ -14,8 +14,7 @@ class LinearRegression:
 
 
     def fit(self, X: np.array, y: np.array):
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
+        
         n = float(len(X)) # Number of elements in X
 
         # Performing Gradient Descent 
@@ -32,9 +31,10 @@ class LinearRegression:
             self.c = self.c - self.lr * D_c  # Update c
             if i % 100 == 0:
                 print(np.mean(y-y_pred))
+        return self.losses
             
 
-    def predict(self, X):
+    def predict(self, X_test):
         # Run the model on the test set
         #self.pred = []
         #for X in self.X_test:
@@ -42,7 +42,7 @@ class LinearRegression:
         #    self.pred.append(y_pred)
         #print(self.pred)
         #print(self.y_test)
-        return self.m * self.X_test + self.c
+        return self.m * X_test + self.c
 
     def evaluate(self, x, y):
         pred = self.predict(x)
