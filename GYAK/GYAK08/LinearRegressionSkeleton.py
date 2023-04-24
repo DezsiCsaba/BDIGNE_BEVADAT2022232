@@ -11,14 +11,13 @@ class LinearRegression:
         self.lr = lr
         self.m = 0
         self.c = 0
-
+        self.losses = []
 
     def fit(self, X: np.array, y: np.array):
         
         n = float(len(X)) # Number of elements in X
 
-        # Performing Gradient Descent 
-        self.losses = []
+        # Performing Gradient Descent
         for i in range(self.epochs): 
             y_pred = self.m*X + self.c  # The current predicted value of Y
 
@@ -34,7 +33,7 @@ class LinearRegression:
         return self.losses
             
 
-    def predict(self, X_test):
+    def predict(self, X):
         # Run the model on the test set
         #self.pred = []
         #for X in self.X_test:
@@ -42,9 +41,9 @@ class LinearRegression:
         #    self.pred.append(y_pred)
         #print(self.pred)
         #print(self.y_test)
-        return self.m * X_test + self.c
+        return self.m * X + self.c
 
-    def evaluate(self, x, y):
-        pred = self.predict(x)
+    def evaluate(self, X, y):
+        pred = self.predict(X)
         err = np.mean((pred - y) ** 2)
         return f"Mean squared error: {err}"
