@@ -36,14 +36,15 @@ class LinearRegression:
 
     def predict(self, X):
         # Run the model on the test set
-        self.pred = []
-        for X in self.X_test:
-            y_pred = self.m*X + self.c
-            self.pred.append(y_pred)
-        print(self.pred)
-        print(self.y_test)
+        #self.pred = []
+        #for X in self.X_test:
+        #    y_pred = self.m*X + self.c
+        #    self.pred.append(y_pred)
+        #print(self.pred)
+        #print(self.y_test)
+        return self.m * self.X_test + self.c
 
     def evaluate(self, x, y):
-        self.predict(x)
-        err = np.mean((self.pred - y) ** 2)
+        pred = self.predict(x)
+        err = np.mean((pred - y) ** 2)
         return f"Mean squared error: {err}"

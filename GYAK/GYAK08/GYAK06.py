@@ -14,11 +14,11 @@ X = df['petal length (cm)'].values
 y = df['petal width (cm)'].values
 
 Lreg.fit(X, y)
-Lreg.predict(X)
+y_pred = Lreg.predict(Lreg.X_test)
 print(Lreg.evaluate(Lreg.X_test, Lreg.y_test))
 
 # plt.scatter(Lreg.X_train, Lreg.y_train)
 plt.scatter(Lreg.X_test, Lreg.y_test)
-plt.plot([min(Lreg.X_test), max(Lreg.X_test)], [min(Lreg.pred), max(Lreg.pred)], color='red')  # predicted
+plt.plot([min(Lreg.X_test), max(Lreg.X_test)], [min(y_pred), max(y_pred)], color='red')  # predicted
 
 plt.show()
