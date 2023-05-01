@@ -1,6 +1,7 @@
 from sklearn.datasets import load_digits
 from sklearn.cluster import KMeans
 import numpy as np
+from sklearn.metrics import confusion_matrix
 
 from sklearn.decomposition import PCA
 
@@ -15,28 +16,23 @@ class KMeansOnDigits():
     def predict(self):
         self.model = KMeans(
             n_clusters=self.n_clusters,
-            random_state=self.random_state,
-            init='random'
+            random_state=self.random_state
         )
-
-        pca = PCA(2)
-        reduced = pca.fit_transform(self.digits)
-        print(reduced.shape)
-
-        X,y = self.digits.data, self.digits.target
-        labels = self.model.fit_predict(reduced)
-        unique_lab = np.unique(labels)
-
-        self.centroids = self.model.cluster_centers_
-
-        return self.centroids
+        self.clusters = self.model.fit_predict(self.digits.data)
+        return self.clusters
 
 
     def get_labels(self):
-        pass
+        labels = np.zeros_like(self.clusters)
+        for c in range(self.n_clusters):
+            mask = (self.clusters == c)
+            target = self.digits.target[mask]
+            mode = np.bincount(target).argmax()
+            labels[mask] = mode
+        self.labels = labels
 
     def calc_accuracy(self):
-        pass
+        self.accuracy = round(np.mean(self.labels == self.digits.target), 2)
 
     def confusion_matrix(self):
-        pass
+        self.mat = confusion_matrix(self.digits.target, self.labels)
