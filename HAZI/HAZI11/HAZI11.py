@@ -68,12 +68,11 @@ Egy példa a kimenetre: model
 return type: keras.engine.sequential.Sequential
 függvény neve: model_fit
 '''
-def model_fit(model, epochs, train_images, train_labelsz) -> tf.keras.Sequential:
+def model_fit(model,epochs, train_images, train_labels) -> tf.keras.Sequential:
     model = model.fit(
         train_images,
-        train_labelsz,
-        epochs=epochs,
-        validation_data=(test_images, test_labels)
+        train_labels,
+        epochs=epochs
         #validation_data = val_data
         )
     return model
@@ -92,7 +91,7 @@ függvény neve: model_evaluate
 '''
 def model_evaluate(model, test_images, test_labels):
     test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
-    return test_loss, test_acc
+    return (test_loss, test_acc)
 
 #model_evaluate(model, test_images, test_labels)
 
